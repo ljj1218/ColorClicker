@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Color Clicker</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <script type = "text/javascript">
+            
+            function random_color(){
+                var rgb = ['a','b','c','d','e','f','0','1','2','3','4','5','6','7','8','9'];
+                color = '#'
+                for(var i = 0; i < 6; i++) 
+                {
+                x = Math.floor((Math.random()*16))
+                color += rgb[x]; 
+                }
+                return color;
+            }
+
+            $(document).ready(function(){
+
+                $("#bigbox").click(function(){
+                    $(this).css("background-color", random_color());
+                    $(".sidebox").css("background-color", random_color());
+                    $(".middlebox").css("background-color", random_color());
+                })
+                
+                $(".middlebox").click(function(){
+                    event.stopPropagation();
+                    $("#bigbox").css("background-color", random_color());
+                })
+
+                $(".sidebox").click(function(){
+                    event.stopPropagation();
+                    $(this).siblings().css("background-color", random_color());
+                })               
+                
+            })
+        </script>
+    </head>
+    <body>
+        <h1>Color Clicker</h1>
+        <div id = "bigbox">
+            <div class = "sidebox"></div>
+            <div class = "middlebox"></div>
+            <div class = "sidebox"></div>
+        </div>
+        <h2>Rules:</h2>
+        <p>1. Click the middle small box to change the color of the big box.</p>
+        <p>2. Click the left or right hand box to change the color of the boxs's sibilings.</p>
+        <p>3. Click the big box to change the color of BOTH boxes.</p>      
+    </body>
+</html>
